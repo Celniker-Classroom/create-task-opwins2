@@ -79,6 +79,7 @@ document.getElementById("resetSurveyButton").addEventListener("click", function(
     document.getElementById("enteredSoreness").value = "";
     document.getElementById("enteredStrain").value = "";
     document.getElementById("enteredFreshness").value = "";
+    document.getElementById("athleteTitle").textContent = "Pass the device to the next athlete!";
 });
 
 document.getElementById("displayDataButton").addEventListener("click", function() {
