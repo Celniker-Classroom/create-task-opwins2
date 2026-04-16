@@ -1,4 +1,3 @@
-// add javascript here
 let finalSoreness = 0
 let strain = 0
 let freshness = 0
