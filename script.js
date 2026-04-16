@@ -106,7 +106,25 @@ document.getElementById("displayDataButton").addEventListener("click", function(
     document.getElementById("avgSoreness").textContent = "Average Soreness: " + averageSore.toFixed(2);
     document.getElementById("avgStrain").textContent = "Average Strain: " + averageStrain.toFixed(2);
     document.getElementById("avgRIR").textContent = "Average Freshness: " + averageFresh.toFixed(2);
-    rpe = (averageSore * 2 + averageStrain * 2 + averageFresh * 2) / 3
+    rpe = (averageSore * 0.2 + averageStrain * 0.3 + averageFresh * 0.5) * 2;
     document.getElementById("overallRPE").textContent = "Overall RPE: " + rpe.toFixed(2);
-
+    feedback();
 });
+
+function feedback() {
+    if (rpe < 3) {
+        document.getElementById("feedback").textContent = "Feedback: Your team is undertraining, consider increasing the intensity or duration of your practices.";
+    }
+    else if (rpe >= 3 && rpe < 5) {
+        document.getElementById("feedback").textContent = "Feedback: Your team is slightly undertraining, consider increasing the intensity or duration of your practices.";
+    }
+    else if (rpe >= 5 && rpe < 8) {
+        document.getElementById("feedback").textContent = "Feedback: Your team is training at an optimal level, keep up the good work!";
+    }
+    else if (rpe >= 8 && rpe < 9) {
+        document.getElementById("feedback").textContent = "Feedback: Your team is slightly overtraining, consider decreasing the intensity or duration of your practices.";
+    }
+    else {
+        document.getElementById("feedback").textContent = "Feedback: Your team is overtraining, consider significantly decreasing the intensity or duration of your practices and incorporating more rest days.";
+    }
+};
