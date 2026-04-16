@@ -22,12 +22,26 @@ document.getElementById("enterButton1").addEventListener("click", function() {
     }
     else {
         finalSoreness = realSoreness
-        listSore.push(finalSoreness);
-        document.getElementById("enterButton1").disabled = true;
+        updateData(finalSoreness, "soreness");
         resetCheck();
     }
     
 });
+
+function updateData(response, type) {
+    const types = ["soreness", "strain", "freshness"];
+    const lists = [listSore, listStrain, listFresh];
+    const buttonIds = ["enterButton1", "enterButton2", "enterButton3"];
+
+    for (let i = 0; i < types.length; i++) {
+        if (types[i] === type) {
+            lists[i].push(response);
+            document.getElementById(buttonIds[i]).disabled = true;
+            break;
+        }
+    }
+}
+
 document.getElementById("enterButton2").addEventListener("click", function() {
     let inputStrain = document.getElementById("enteredStrain").value.trim();
     let realStrain = parseInt(inputStrain, 10);
@@ -39,8 +53,7 @@ document.getElementById("enterButton2").addEventListener("click", function() {
     }
     else {
         strain = realStrain
-        listStrain.push(strain);
-        document.getElementById("enterButton2").disabled = true;
+        updateData(strain, "strain");
         resetCheck();
     }
     
@@ -56,8 +69,7 @@ document.getElementById("enterButton3").addEventListener("click", function() {
     }
     else {
         freshness = realFreshness
-        listFresh.push(freshness);
-        document.getElementById("enterButton3").disabled = true;
+        updateData(freshness, "freshness");
         resetCheck();
     }
     
