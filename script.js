@@ -2,9 +2,7 @@ let finalSoreness = 0
 let strain = 0
 let freshness = 0
 let rpe = 0
-let listSore = []
-let listStrain = []
-let listFresh = []
+
 document.getElementById("avgSoreness").style.visibility = "hidden";
 document.getElementById("avgStrain").style.visibility = "hidden";
 document.getElementById("avgRIR").style.visibility = "hidden";
@@ -26,6 +24,9 @@ document.getElementById("enterButton1").addEventListener("click", function() {
     }
     
 });
+let listSore = []
+let listStrain = []
+let listFresh = []
 
 function updateData(response, type) {
     const types = ["soreness", "strain", "freshness"];
