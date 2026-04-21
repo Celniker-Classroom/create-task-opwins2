@@ -124,19 +124,28 @@ document.getElementById("displayDataButton").addEventListener("click", function(
 });
 
 function feedback() {
+    const feedbackElement = document.getElementById("feedback");
+    // Remove any existing feedback classes
+    feedbackElement.classList.remove("feedback-optimal", "feedback-undertraining", "feedback-slightly-under", "feedback-slightly-over", "feedback-overtraining");
+    
     if (rpe < 3) {
-        document.getElementById("feedback").textContent = "Feedback: Your team is undertraining, consider increasing the intensity or duration of your practices.";
+        feedbackElement.textContent = "Feedback: Your team is undertraining, consider increasing the intensity or duration of your practices.";
+        feedbackElement.classList.add("feedback-undertraining");
     }
     else if (rpe >= 3 && rpe < 5) {
-        document.getElementById("feedback").textContent = "Feedback: Your team is slightly undertraining, consider increasing the intensity or duration of your practices.";
+        feedbackElement.textContent = "Feedback: Your team is slightly undertraining, consider increasing the intensity or duration of your practices.";
+        feedbackElement.classList.add("feedback-slightly-under");
     }
     else if (rpe >= 5 && rpe < 8) {
-        document.getElementById("feedback").textContent = "Feedback: Your team is training at an optimal level, keep up the good work!";
+        feedbackElement.textContent = "Feedback: Your team is training at an optimal level, keep up the good work!";
+        feedbackElement.classList.add("feedback-optimal");
     }
     else if (rpe >= 8 && rpe < 9) {
-        document.getElementById("feedback").textContent = "Feedback: Your team is slightly overtraining, consider decreasing the intensity or duration of your practices.";
+        feedbackElement.textContent = "Feedback: Your team is slightly overtraining, consider decreasing the intensity or duration of your practices.";
+        feedbackElement.classList.add("feedback-slightly-over");
     }
     else {
-        document.getElementById("feedback").textContent = "Feedback: Your team is overtraining, consider significantly decreasing the intensity or duration of your practices and incorporating more rest days.";
+        feedbackElement.textContent = "Feedback: Your team is overtraining, consider significantly decreasing the intensity or duration of your practices and incorporating more rest days.";
+        feedbackElement.classList.add("feedback-overtraining");
     }
 };
