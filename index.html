@@ -8,6 +8,12 @@
 </head>
 <body>
     <h1>CCA Ravens Athletics - Athlete RPE collection</h1>
+    <div id="athleteCountSection">
+        <h3>Coach Setup</h3>
+        <p id="athleteCountLabel">How many athletes are at practice today?</p>
+        <input type="text" id="athleteCountInput">
+        <button id="setAthleteCountButton">Set</button>
+    </div>
     <h3 id="athleteTitle">(Athlete) Practice Strain Report</h3>
     <p id = "question1">How sore were you this morning? Enter a number 1-5:</p>
     <input type="text" id="enteredSoreness">
@@ -23,6 +29,14 @@
     <h3>Coach Data</h3>
     <p>Once all athletes have completed the survey, please press this button to display data</p>
     <button id="displayDataButton">Display</button>
+    <div id="mismatchWarning" style="display: none;">
+        <p id="warningMessage"></p>
+        <p>Do you want to display data anyway?</p>
+        <input type="radio" id="displayYes" name="displayChoice" value="yes">
+        <label for="displayYes">Yes</label>
+        <input type="radio" id="displayNo" name="displayChoice" value="no">
+        <label for="displayNo">No</label>
+    </div>
     <p id="avgSoreness">Average Soreness: </p>
     <p id="avgStrain">Average Strain: </p>
     <p id="avgRIR">Average Freshness: </p>

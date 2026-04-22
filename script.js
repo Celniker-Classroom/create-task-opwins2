@@ -2,6 +2,8 @@ let finalSoreness = 0
 let strain = 0
 let freshness = 0
 let rpe = 0
+let athleteCount = 0
+let surveyCount = 0
 
 document.getElementById("avgSoreness").style.visibility = "hidden";
 document.getElementById("avgStrain").style.visibility = "hidden";
@@ -75,12 +77,24 @@ document.getElementById("enterButton3").addEventListener("click", function() {
     
 });
 
+document.getElementById("setAthleteCountButton").addEventListener("click", function() {
+    let inputCount = document.getElementById("athleteCountInput").value.trim();
+    let realCount = parseInt(inputCount, 10);
+    if (inputCount === "" || isNaN(realCount) || realCount <= 0) {
+        document.getElementById("athleteCountLabel").textContent = "Please enter a valid positive number for athlete count!";
+    } else {
+        athleteCount = realCount;
+        document.getElementById("athleteCountSection").style.display = "none";
+    }
+});
+
 function resetCheck() {
     if (document.getElementById("enterButton3").disabled == true && document.getElementById("enterButton2").disabled == true && document.getElementById("enterButton1").disabled == true) {
         document.getElementById("resetSurveyButton").disabled = false;
     }}
 
 document.getElementById("resetSurveyButton").addEventListener("click", function() {
+    surveyCount++;
     document.getElementById("enterButton1").disabled = false;
     document.getElementById("enterButton2").disabled = false;
     document.getElementById("enterButton3").disabled = false;
@@ -95,6 +109,22 @@ document.getElementById("resetSurveyButton").addEventListener("click", function(
 });
 
 document.getElementById("displayDataButton").addEventListener("click", function() {
+    if (surveyCount === athleteCount) {
+        displayData();
+    } else if (surveyCount < athleteCount) {
+        let missing = athleteCount - surveyCount;
+        document.getElementById("athleteTitle").textContent = `Warning: Only ${surveyCount} out of ${athleteCount} athletes have completed the survey (${missing} missing).`;
+        document.getElementById("warningMessage").textContent = `Only ${surveyCount} out of ${athleteCount} athletes have completed the survey.`;
+        document.getElementById("mismatchWarning").style.display = "block";
+    }
+    else {
+        document.getElementById("athleteTitle").textContent = `Warning: More surveys completed (${surveyCount}) than the number of athletes (${athleteCount}). Please check the athlete count and survey count.`;
+        document.getElementById("warningMessage").textContent = `More surveys completed (${surveyCount}) than the number of athletes (${athleteCount}). Please check the athlete count and survey count.`;
+        document.getElementById("mismatchWarning").style.display = "block";
+    }
+});
+
+function displayData() {
     let averageSore = 0
     let averageStrain = 0
     let averageFresh = 0
@@ -121,6 +151,21 @@ document.getElementById("displayDataButton").addEventListener("click", function(
     rpe = (averageSore * 0.2 + averageStrain * 0.3 + averageFresh * 0.5) * 2;
     document.getElementById("overallRPE").textContent = "Overall RPE: " + rpe.toFixed(2);
     feedback();
+}
+
+document.getElementById("displayYes").addEventListener("change", function() {
+    if (this.checked) {
+        displayData();
+        document.getElementById("mismatchWarning").style.display = "none";
+        document.getElementById("athleteTitle").textContent = "(Athlete) Practice Strain Report";
+    }
+});
+
+document.getElementById("displayNo").addEventListener("change", function() {
+    if (this.checked) {
+        document.getElementById("mismatchWarning").style.display = "none";
+        document.getElementById("athleteTitle").textContent = "(Athlete) Practice Strain Report";
+    }
 });
 
 function feedback() {
