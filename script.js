@@ -10,6 +10,7 @@ document.getElementById("avgStrain").style.visibility = "hidden";
 document.getElementById("avgRIR").style.visibility = "hidden";
 document.getElementById("overallRPE").style.visibility = "hidden";
 document.getElementById("feedback").style.visibility = "hidden";
+document.getElementById("totalFormResetButton").style.visibility = "hidden";
 document.getElementById("enterButton1").addEventListener("click", function() {
     let inputSoreness = document.getElementById("enteredSoreness").value.trim();
     let realSoreness = parseInt(inputSoreness, 10);
@@ -93,6 +94,10 @@ function resetCheck() {
         document.getElementById("resetSurveyButton").disabled = false;
     }}
 
+function invertFreshness(value) {
+    return 6 - value;
+}
+
 document.getElementById("resetSurveyButton").addEventListener("click", function() {
     surveyCount++;
     document.getElementById("enterButton1").disabled = false;
@@ -115,11 +120,15 @@ document.getElementById("displayDataButton").addEventListener("click", function(
         let missing = athleteCount - surveyCount;
         document.getElementById("athleteTitle").textContent = `Warning: Only ${surveyCount} out of ${athleteCount} athletes have completed the survey (${missing} missing).`;
         document.getElementById("warningMessage").textContent = `Only ${surveyCount} out of ${athleteCount} athletes have completed the survey.`;
+        document.getElementById("displayYes").checked = false;
+        document.getElementById("displayNo").checked = false;
         document.getElementById("mismatchWarning").style.display = "block";
     }
     else {
         document.getElementById("athleteTitle").textContent = `Warning: More surveys completed (${surveyCount}) than the number of athletes (${athleteCount}). Please check the athlete count and survey count.`;
         document.getElementById("warningMessage").textContent = `More surveys completed (${surveyCount}) than the number of athletes (${athleteCount}). Please check the athlete count and survey count.`;
+        document.getElementById("displayYes").checked = false;
+        document.getElementById("displayNo").checked = false;
         document.getElementById("mismatchWarning").style.display = "block";
     }
 });
@@ -133,6 +142,9 @@ function displayData() {
     document.getElementById("avgRIR").style.visibility = "visible";
     document.getElementById("overallRPE").style.visibility = "visible";
     document.getElementById("feedback").style.visibility = "visible";
+    document.getElementById("totalFormResetButton").style.visibility = "visible";
+    document.getElementById("displayYes").checked = false;
+    document.getElementById("displayNo").checked = false;
     for (let i = 0; i < listSore.length; i++) {
         averageSore += listSore[i]
     }
@@ -140,7 +152,7 @@ function displayData() {
         averageStrain += listStrain[i]
     }
     for (let i = 0; i < listFresh.length; i++) {
-        averageFresh += listFresh[i]
+        averageFresh += invertFreshness(listFresh[i]);
     }
     averageSore = averageSore / listSore.length
     averageStrain = averageStrain / listStrain.length
@@ -151,12 +163,32 @@ function displayData() {
     rpe = (averageSore * 0.2 + averageStrain * 0.3 + averageFresh * 0.5) * 2;
     document.getElementById("overallRPE").textContent = "Overall RPE: " + rpe.toFixed(2);
     feedback();
-}
+};
+document.getElementById("totalFormResetButton").addEventListener("click", function() {
+    listSore = []
+    listStrain = []
+    listFresh = []
+    surveyCount = 0
+    athleteCount = 0
+    document.getElementById("avgSoreness").style.visibility = "hidden";
+    document.getElementById("avgStrain").style.visibility = "hidden";
+    document.getElementById("avgRIR").style.visibility = "hidden";
+    document.getElementById("overallRPE").style.visibility = "hidden";
+    document.getElementById("feedback").style.visibility = "hidden";
+    document.getElementById("totalFormResetButton").style.visibility = "hidden";
+    document.getElementById("athleteTitle").textContent = "(Athlete) Practice Strain Report";
+    document.getElementById("athleteCountSection").style.display = "block";
+    document.getElementById("displayYes").checked = false;
+    document.getElementById("displayNo").checked = false;
+    document.getElementById("athleteCountInput") = "";
+});
 
 document.getElementById("displayYes").addEventListener("change", function() {
     if (this.checked) {
         displayData();
         document.getElementById("mismatchWarning").style.display = "none";
+        document.getElementById("displayYes").checked = false;
+        document.getElementById("displayNo").checked = false;
         document.getElementById("athleteTitle").textContent = "(Athlete) Practice Strain Report";
     }
 });
@@ -164,6 +196,8 @@ document.getElementById("displayYes").addEventListener("change", function() {
 document.getElementById("displayNo").addEventListener("change", function() {
     if (this.checked) {
         document.getElementById("mismatchWarning").style.display = "none";
+        document.getElementById("displayYes").checked = false;
+        document.getElementById("displayNo").checked = false;
         document.getElementById("athleteTitle").textContent = "(Athlete) Practice Strain Report";
     }
 });
