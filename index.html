@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>CCA Ravens Athletics - Athlete RPE collection</h1>
+    <div class="header-container">
+        <img src="https://www.sduhsd.net/pictures/School%20Images%20and%20Logos/Logos/CCA_raven.png" alt="CCA Ravens Logo" id="logo">
+        <h1>CCA Ravens Athletics - Athlete RPE collection</h1>
+    </div>
     <div id="athleteCountSection">
         <h3>Coach Setup</h3>
         <p id="athleteCountLabel">How many athletes are at practice today?</p>
@@ -15,33 +18,37 @@
         <button id="setAthleteCountButton">Set</button>
     </div>
     <h3 id="athleteTitle">(Athlete) Practice Strain Report</h3>
-    <p id = "question1">How sore were you this morning? Enter a number 1-5:</p>
-    <input type="text" id="enteredSoreness">
-    <button id= "enterButton1">Enter</button>
-    <p id = "question2">How physcially demanding was practice today? Enter a number 1-5:</p>
-    <input type="text" id="enteredStrain">
-    <button id= "enterButton2">Enter</button>
-    <p id = "question3">How fresh do you feel (could you have practiced longer/harder)? Enter a number 1-5:</p>
-    <input type="text" id="enteredFreshness">
-    <button id= "enterButton3">Enter</button>
-    <p></p>
-    <button id= "resetSurveyButton" disabled>Done!</button>
-    <h3>Coach Data</h3>
-    <p>Once all athletes have completed the survey, please press this button to display data</p>
-    <button id="displayDataButton">Display</button>
-    <div id="mismatchWarning" style="display: none;">
-        <p id="warningMessage"></p>
-        <p>Do you want to display data anyway?</p>
-        <input type="radio" id="displayYes" name="displayChoice" value="yes">
-        <label for="displayYes">Yes</label>
-        <input type="radio" id="displayNo" name="displayChoice" value="no">
-        <label for="displayNo">No</label>
+    <div class="survey-section">
+        <p id = "question1">How sore were you this morning? Enter a number 1-5:</p>
+        <input type="text" id="enteredSoreness">
+        <button id= "enterButton1">Enter</button>
+        <p id = "question2">How physcially demanding was practice today? Enter a number 1-5:</p>
+        <input type="text" id="enteredStrain">
+        <button id= "enterButton2">Enter</button>
+        <p id = "question3">How fresh do you feel (could you have practiced longer/harder)? Enter a number 1-5:</p>
+        <input type="text" id="enteredFreshness">
+        <button id= "enterButton3">Enter</button>
+        <p></p>
+        <button id= "resetSurveyButton" disabled>Done!</button>
     </div>
-    <p id="avgSoreness">Average Soreness: </p>
-    <p id="avgStrain">Average Strain: </p>
-    <p id="avgRIR">Average Freshness (inverted): </p>
-    <p id="overallRPE">Overall RPE:</p>
-    <p id="feedback">Once data is collected, feedback will appear here</p>
-    <button id="totalFormResetButton">Reset Form</button>
+    <h3>Coach Data</h3>
+    <div class="survey-section">
+        <p>Once all athletes have completed the survey, please press this button to display data</p>
+        <button id="displayDataButton">Display</button>
+        <div id="mismatchWarning" style="display: none;">
+            <p id="warningMessage"></p>
+            <p>Do you want to display data anyway?</p>
+            <input type="radio" id="displayYes" name="displayChoice" value="yes">
+            <label for="displayYes">Yes</label>
+            <input type="radio" id="displayNo" name="displayChoice" value="no">
+            <label for="displayNo">No</label>
+        </div>
+        <p id="avgSoreness">Average Soreness: </p>
+        <p id="avgStrain">Average Strain: </p>
+        <p id="avgRIR">Average Freshness (inverted): </p>
+        <p id="overallRPE">Overall RPE:</p>
+        <p id="feedback">Once data is collected, feedback will appear here</p>
+        <button id="totalFormResetButton">Reset Form</button>
+    </div>
 </body>
 </html>
