@@ -1,4 +1,5 @@
 
+/* Base styles for page layout and colors */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #800d0d;
@@ -11,6 +12,7 @@ body {
     margin-right: auto;
 }
 
+/* Header styling with flexbox layout */
 .header-container {
     display: flex;
     align-items: center;
@@ -68,6 +70,7 @@ input[type="text"]:focus {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
+/* Button styling with hover and disabled states */
 button {
     background-color: #b60000;
     color: #ffffff;
@@ -135,7 +138,7 @@ button:disabled {
     font-weight: bold;
     color: #ffffff;
 }
-
+/* Feedback color coding for different training states */
 .feedback-optimal {
     color: #8fff8f; 
 }

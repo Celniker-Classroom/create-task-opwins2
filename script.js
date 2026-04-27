@@ -1,3 +1,4 @@
+// Initialize global variables for tracking survey data
 let finalSoreness = 0
 let strain = 0
 let freshness = 0
@@ -5,12 +6,14 @@ let rpe = 0
 let athleteCount = 0
 let surveyCount = 0
 
+// Hide result elements initially on page load
 document.getElementById("avgSoreness").style.visibility = "hidden";
 document.getElementById("avgStrain").style.visibility = "hidden";
 document.getElementById("avgRIR").style.visibility = "hidden";
 document.getElementById("overallRPE").style.visibility = "hidden";
 document.getElementById("feedback").style.visibility = "hidden";
 document.getElementById("totalFormResetButton").style.visibility = "hidden";
+// Handle soreness input validation and data update
 document.getElementById("enterButton1").addEventListener("click", function() {
     let inputSoreness = document.getElementById("enteredSoreness").value.trim();
     let realSoreness = parseInt(inputSoreness, 10);
@@ -31,6 +34,7 @@ let listSore = []
 let listStrain = []
 let listFresh = []
 
+// Update data lists and disable corresponding buttons
 function updateData(response, type) {
     const types = ["soreness", "strain", "freshness"];
     const lists = [listSore, listStrain, listFresh];
@@ -45,6 +49,7 @@ function updateData(response, type) {
     }
 }
 
+// Handle strain input validation and data update
 document.getElementById("enterButton2").addEventListener("click", function() {
     let inputStrain = document.getElementById("enteredStrain").value.trim();
     let realStrain = parseInt(inputStrain, 10);
@@ -61,6 +66,8 @@ document.getElementById("enterButton2").addEventListener("click", function() {
     }
     
 });
+
+// Handle freshness input validation and data update
 document.getElementById("enterButton3").addEventListener("click", function() {
     let inputFreshness = document.getElementById("enteredFreshness").value.trim();
     let realFreshness = parseInt(inputFreshness, 10);
@@ -78,6 +85,7 @@ document.getElementById("enterButton3").addEventListener("click", function() {
     
 });
 
+// Set the total number of athletes for survey
 document.getElementById("setAthleteCountButton").addEventListener("click", function() {
     let inputCount = document.getElementById("athleteCountInput").value.trim();
     let realCount = parseInt(inputCount, 10);
@@ -89,15 +97,18 @@ document.getElementById("setAthleteCountButton").addEventListener("click", funct
     }
 });
 
+// Check if all inputs are done to enable reset
 function resetCheck() {
     if (document.getElementById("enterButton3").disabled == true && document.getElementById("enterButton2").disabled == true && document.getElementById("enterButton1").disabled == true) {
         document.getElementById("resetSurveyButton").disabled = false;
     }}
 
+// Invert freshness scale for calculation purposes
 function invertFreshness(value) {
     return 6 - value;
 }
 
+// Reset form for next athlete's survey input
 document.getElementById("resetSurveyButton").addEventListener("click", function() {
     surveyCount++;
     document.getElementById("enterButton1").disabled = false;
@@ -113,6 +124,7 @@ document.getElementById("resetSurveyButton").addEventListener("click", function(
     document.getElementById("athleteTitle").textContent = "Pass the device to the next athlete!";
 });
 
+// Check survey completion and handle data display
 document.getElementById("displayDataButton").addEventListener("click", function() {
     if (surveyCount === athleteCount) {
         displayData();
@@ -133,6 +145,7 @@ document.getElementById("displayDataButton").addEventListener("click", function(
     }
 });
 
+// Calculate and display survey averages and RPE
 function displayData() {
     let averageSore = 0
     let averageStrain = 0
@@ -164,6 +177,8 @@ function displayData() {
     document.getElementById("overallRPE").textContent = "Overall RPE: " + rpe.toFixed(2);
     feedback();
 };
+
+// Reset entire form for new session
 document.getElementById("totalFormResetButton").addEventListener("click", function() {
     listSore = []
     listStrain = []
@@ -183,6 +198,7 @@ document.getElementById("totalFormResetButton").addEventListener("click", functi
     document.getElementById("athleteCountInput") = "";
 });
 
+// Handle user confirmation to display data anyway
 document.getElementById("displayYes").addEventListener("change", function() {
     if (this.checked) {
         displayData();
@@ -193,6 +209,7 @@ document.getElementById("displayYes").addEventListener("change", function() {
     }
 });
 
+// Handle user choice to not display incomplete data
 document.getElementById("displayNo").addEventListener("change", function() {
     if (this.checked) {
         document.getElementById("mismatchWarning").style.display = "none";
@@ -202,6 +219,7 @@ document.getElementById("displayNo").addEventListener("change", function() {
     }
 });
 
+// Provide training feedback based on calculated RPE
 function feedback() {
     const feedbackElement = document.getElementById("feedback");
     // Remove any existing feedback classes
